@@ -2,7 +2,9 @@
 
 Proyecto académico para Evaluación Parcial N.º 3 de Desarrollo Backend, INACAP. Docente indicado en el enunciado: Marcelo Alvarado Aravena.
 
-**Estado del rediseño (2026-11-05):** portal de tutores, relación opcional Tutor–User, permisos por objeto, recuperación de contraseña, límites compartidos de autenticación y personalización del administrador implementados. La base existente se conserva: solo se añaden las migraciones `0002_tutor_usuario` y `0003_loginwindow`. Ver resultados efectivos en [verificación del rediseño](docs/redisenio.md). El entorno no permite abrir sockets, por lo que la aplicación con PostgreSQL, la suite de integración y la revisión visual requieren ejecución en Debian. No se ha desplegado en AWS.
+**Estado del proyecto:** PetCare fue desplegado y probado en AWS EC2 con Django, PostgreSQL, Gunicorn, Nginx y HTTPS. URL: **https://petcare-inacap.duckdns.org/**. La instancia está temporalmente detenida para controlar costos y se encenderá para la defensa presencial de EVA 3.
+
+El portal de tutores, la relación opcional Tutor–User, los permisos por objeto, la recuperación de contraseña, los límites compartidos de autenticación y la personalización del administrador están implementados. La base existente se conserva. El commit desplegado es `2206afe6a7120c4712797830863c7e6bbc0d77c0`; en esa actualización no había migraciones pendientes y no fue necesario ejecutarlas. Ver también [verificación del calendario](docs/verificacion-calendario.md) y [verificación del rediseño](docs/redisenio.md), cuyos registros corresponden a distintas etapas del proyecto.
 
 ## Problema y objetivo
 
@@ -22,8 +24,11 @@ La compatibilidad de Python 3.13 está documentada por [Django](https://docs.dja
 
 Requisitos: Debian 13 con Python 3.13, acceso sudo para instalar paquetes, PostgreSQL 14+ y conexión a Internet para instalar dependencias. El script también sirve en Ubuntu si se configura `PYTHON_BIN` con Python 3.13. No ejecuta migraciones ni sobrescribe `.env`.
 
+Para una instalación nueva, clona el repositorio y entra en su directorio:
+
 ```bash
-cd /home/chororemy/Proyectos/PetCare
+git clone https://github.com/DaniAce21/PetCare.git
+cd PetCare
 bash scripts/instalar_dependencias.sh
 sudo systemctl enable --now postgresql
 ```
@@ -38,7 +43,7 @@ python3 -m venv .venv
 .venv/bin/python scripts/configurar_local.py
 ```
 
-`configurar_local.py` crea una clave aleatoria y un `.env` de permisos 600; no imprime la clave. La carpeta `.venv` existente en el equipo de construcción contiene dependencias copiadas de un entorno local porque no había DNS disponible; **una instalación nueva debe ejecutar pip según requirements.txt**, incluido Gunicorn, que no estaba disponible en dicho equipo.
+`configurar_local.py` crea una clave aleatoria y un `.env` de permisos 600; no imprime la clave. Una instalación nueva debe crear su propio entorno virtual e instalar las dependencias de `requirements.txt`, incluido Gunicorn; no se debe copiar el entorno virtual de producción.
 
 ### PostgreSQL
 
@@ -65,7 +70,7 @@ Configura `DB_NAME=petcare`, `DB_USER=petcare`, `DB_PASSWORD` con la contraseña
 
 Abrir **http://127.0.0.1:8000/**. Administrador: **http://127.0.0.1:8000/admin/**. API navegable autenticada: **http://127.0.0.1:8000/api/**.
 
-Los comandos anteriores están listos para ejecutar en tu Debian fuera del entorno restringido; el arranque con BD **no pudo completarse aquí**. `migrate` es obligatorio antes de acceder al sistema. No ejecutar `legacy/server.py`: es el prototipo anterior y no pertenece a la aplicación final.
+El arranque con PostgreSQL fue verificado y la aplicación funcionó en AWS EC2. En una instalación nueva, `migrate` es obligatorio antes de acceder al sistema. En una instancia existente, revisar primero las migraciones pendientes y seguir el procedimiento de respaldo y actualización. No ejecutar `legacy/server.py`: es el prototipo anterior y no pertenece a la aplicación final.
 
 ### Datos de demostración
 
@@ -147,7 +152,7 @@ sudo -u postgres psql -c 'ALTER ROLE petcare CREATEDB;'
 
 O ejecutar `bash scripts/verificar.sh` (requiere Node únicamente para verificar sintaxis JavaScript; instalarlo con `sudo apt-get install nodejs` si falta). Pruebas independientes de conexión: `.venv/bin/python manage.py test clinica.tests.test_unit`.
 
-En cambios de modelos: `makemigrations clinica`, revisar la migración, probar y luego `migrate`. La migración inicial incluye `btree_gist`. No modificar manualmente tablas ni usar el antiguo `schema.sql`. CI con PostgreSQL está definido en `.github/workflows/tests.yml`; no ha sido ejecutado en GitHub desde esta sesión.
+En cambios de modelos: `makemigrations clinica`, revisar la migración, probar y luego `migrate`. La migración inicial incluye `btree_gist`. No modificar manualmente tablas ni usar el antiguo `schema.sql`. CI con PostgreSQL está definido en `.github/workflows/tests.yml` y terminó correctamente para el commit desplegado. La suite local con PostgreSQL aislado aprobó **95 pruebas** y `node --test tests/calendar-time.cjs` también pasó. En EC2 se verificaron `manage.py check`, ausencia de migraciones pendientes, permisos, calendario, estáticos y conservación de datos clínicos mediante comparación de huellas SHA-256 antes y después del despliegue. La suite completa no se ejecutó contra la base productiva.
 
 ## Recordatorios y correo
 
@@ -163,14 +168,16 @@ Para ejecución automática usa el timer de `deploy/` o cron según [EC2](docs/d
 ## Despliegue EC2 y evidencias académicas
 
 - Guía reproducible: [despliegue EC2](docs/despliegue-ec2.md).
-- IP pública real: **PENDIENTE — completar al crear la instancia**.
-- URL pública: **PENDIENTE — sin despliegue realizado**.
+- Estado: **desplegado y probado en AWS EC2; instancia temporalmente detenida para controlar costos**. Se encenderá para la defensa presencial de EVA 3.
+- URL pública configurada: **https://petcare-inacap.duckdns.org/**; el servicio no estará disponible mientras la instancia esté detenida.
+- Al encender la instancia, verificar su IP pública y actualizar DuckDNS si cambió; no se presupone una IP vigente.
+- Actualización y reversión con respaldos: [procedimiento](docs/actualizacion-aws.md).
 - Datos e instalación PostgreSQL: [guía](docs/postgresql.md).
 - Defensa, pruebas manuales y capturas: [guía de defensa](docs/defensa-oral.md).
 - Uso de IA y prompts reales disponibles: [prompts_ia.md](prompts_ia.md).
 - Correspondencia de requisitos y evidencias: [matriz de evaluación](docs/matriz-evaluacion.md).
 
-Incorporar capturas propias en `docs/capturas/` después de levantar la aplicación: login, dashboard, CRUD, calendario, error de solapamiento, ficha/impresión, vacunas, Admin y terminal de tests. No se incluyen capturas fabricadas ni resultados de pruebas que no se hayan ejecutado.
+Se realizó una auditoría visual automatizada con capturas de las vistas públicas de producción y de los flujos Tutor/Veterinario en un entorno aislado con datos ficticios. El informe y las capturas se conservan localmente y no se publicaron automáticamente. Para la defensa, seleccionar evidencias propias verificadas y sin datos sensibles; `docs/capturas/` es una ubicación propuesta para las que se decida incluir. No se presentan capturas fabricadas ni se atribuyen a producción pruebas realizadas solo en el entorno aislado.
 
 ## Estructura de entrega
 
@@ -191,12 +198,12 @@ legacy/                    Prototipo previo conservado; no se ejecuta
 
 ## Límites y pendientes verificables
 
-- Falta ejecutar migraciones, suite con BD y prueba visual en un entorno que permita sockets; no se sustituyó PostgreSQL por SQLite ni por mocks para declarar los tests aprobados.
-- Falta instalar/verificar Gunicorn en un entorno con red. Nginx/systemd/EC2 están preparados, no instalados ni activados desde esta sesión.
-- La documentación sigue el enunciado recibido; no se adjuntó la rúbrica oficial en PDF, por lo que la calificación EXCELENTE depende de la revisión docente y de las evidencias pendientes.
-- Disponibilidad semanal recurrente; no hay feriados, bloqueos excepcionales o portal de tutores.
+- Migraciones existentes aplicadas y sin pendientes en la verificación del despliegue; suite con PostgreSQL y pruebas JavaScript aprobadas. Gunicorn, Nginx y PostgreSQL se comprobaron activos después de actualizar EC2, antes de la detención temporal de la instancia.
+- La auditoría visual detectó desbordamientos móviles en el login y el resumen veterinario, además de detalles de texto. Esas correcciones siguen pendientes. El login real de Tutor y Veterinario en producción permanece pendiente por falta de credenciales demo utilizables; ambos flujos se probaron con credenciales efímeras en el entorno aislado.
+- La documentación sigue el enunciado recibido; no se adjuntó la rúbrica oficial en PDF. La evaluación académica corresponde al docente y a las evidencias presentadas en la defensa.
+- Disponibilidad semanal recurrente; no hay feriados ni bloqueos excepcionales. El portal de tutores está implementado, con reserva guiada e historial propio de lectura.
 - La interfaz carga listas de referencia completas para los selectores; para clínicas grandes conviene autocompletado remoto. Las tablas y agenda usan endpoints paginados.
-- El envío SMTP real y certificados HTTPS requieren configuración externa; recepción solo registra datos administrativos de mascotas y no consulta las fichas.
+- HTTPS y sus certificados fueron configurados y verificados en EC2. El envío y la entrega SMTP real siguen pendientes de verificación; recepción solo registra datos administrativos de mascotas y no consulta las fichas.
 
 
 ## Portal Tutor y continuidad de cuentas

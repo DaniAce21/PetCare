@@ -1,0 +1,1 @@
+{% extends 'portal/base.html' %}{% block content %}<section class='card form-card'><h1>Recuperar contraseña</h1><p>Ingresa el correo de tu cuenta. Si corresponde a una cuenta activa, recibirás un enlace temporal.</p><form method="post">{% csrf_token %}{{ form.as_p }}<button class="primary">Enviar enlace</button></form></section>{% endblock %}

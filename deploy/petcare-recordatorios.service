@@ -1,0 +1,15 @@
+[Unit]
+Description=Generación y envío de recordatorios PetCare
+After=postgresql.service network-online.target
+
+[Service]
+Type=oneshot
+User=petcare
+Group=www-data
+WorkingDirectory=/srv/petcare
+EnvironmentFile=/srv/petcare/.env
+ExecStart=/srv/petcare/.venv/bin/python manage.py generar_recordatorios --enviar
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+NoNewPrivileges=true

@@ -1,0 +1,22 @@
+[Unit]
+Description=PetCare Django mediante Gunicorn
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=petcare
+Group=www-data
+WorkingDirectory=/srv/petcare
+EnvironmentFile=/srv/petcare/.env
+ExecStart=/srv/petcare/.venv/bin/gunicorn petcare.wsgi:application --config /srv/petcare/deploy/gunicorn.conf.py
+Restart=on-failure
+RestartSec=5
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+NoNewPrivileges=true
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

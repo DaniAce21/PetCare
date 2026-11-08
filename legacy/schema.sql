@@ -1,0 +1,11 @@
+PRAGMA foreign_keys = ON;
+CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS tutors(id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL, phone TEXT NOT NULL, address TEXT NOT NULL DEFAULT '');
+CREATE TABLE IF NOT EXISTS pets(id INTEGER PRIMARY KEY, tutor_id INTEGER NOT NULL REFERENCES tutors(id), name TEXT NOT NULL, species TEXT NOT NULL, breed TEXT NOT NULL DEFAULT '', birth_date TEXT, sex TEXT NOT NULL DEFAULT 'Sin especificar', allergies TEXT NOT NULL DEFAULT '');
+CREATE TABLE IF NOT EXISTS vets(id INTEGER PRIMARY KEY, name TEXT NOT NULL, specialty TEXT NOT NULL DEFAULT 'Medicina general', color TEXT NOT NULL DEFAULT '#147d70', active INTEGER NOT NULL DEFAULT 1);
+CREATE TABLE IF NOT EXISTS availability(id INTEGER PRIMARY KEY, vet_id INTEGER NOT NULL REFERENCES vets(id), weekday INTEGER NOT NULL CHECK(weekday BETWEEN 0 AND 6), start_time TEXT NOT NULL, end_time TEXT NOT NULL, CHECK(start_time < end_time));
+CREATE TABLE IF NOT EXISTS appointments(id INTEGER PRIMARY KEY, pet_id INTEGER NOT NULL REFERENCES pets(id), vet_id INTEGER NOT NULL REFERENCES vets(id), start TEXT NOT NULL, end TEXT NOT NULL, reason TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'Confirmada' CHECK(status IN ('Confirmada','En atención','Completada','Cancelada')), CHECK(start < end));
+CREATE INDEX IF NOT EXISTS appointments_schedule ON appointments(vet_id,start,end);
+CREATE TABLE IF NOT EXISTS records(id INTEGER PRIMARY KEY, pet_id INTEGER NOT NULL REFERENCES pets(id), vet_id INTEGER NOT NULL REFERENCES vets(id), date TEXT NOT NULL, weight REAL CHECK(weight > 0), symptoms TEXT NOT NULL, diagnosis TEXT NOT NULL, treatment TEXT NOT NULL, notes TEXT NOT NULL DEFAULT '');
+CREATE TABLE IF NOT EXISTS vaccinations(id INTEGER PRIMARY KEY, pet_id INTEGER NOT NULL REFERENCES pets(id), name TEXT NOT NULL, applied_date TEXT NOT NULL, due_date TEXT NOT NULL, CHECK(due_date >= applied_date));
+CREATE TABLE IF NOT EXISTS reminders(id INTEGER PRIMARY KEY, vaccine_id INTEGER NOT NULL UNIQUE REFERENCES vaccinations(id), due_date TEXT NOT NULL, email TEXT NOT NULL, subject TEXT NOT NULL, body TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'Pendiente' CHECK(status IN ('Pendiente','Enviado')), sent_at TEXT, last_error TEXT);

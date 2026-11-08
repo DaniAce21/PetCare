@@ -1,0 +1,533 @@
+$ .venv/bin/python manage.py check
+System check identified no issues (0 silenced).
+
+exit_code=0
+
+$ .venv/bin/python manage.py makemigrations --check --dry-run
+No changes detected
+/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/commands/makemigrations.py:161: RuntimeWarning: Got an error checking a consistent migration history performed for database connection 'default': connection is bad: no error details available
+  warnings.warn(
+
+exit_code=0
+
+$ .venv/bin/python manage.py migrate --noinput
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.OperationalError: connection is bad: no error details available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/manage.py", line 7, in <module>
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/base.py", line 420, in run_from_argv
+    self.execute(*args, **cmd_options)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/base.py", line 464, in execute
+    output = self.handle(*args, **options)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/base.py", line 111, in wrapper
+    res = handle_func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/commands/migrate.py", line 114, in handle
+    executor = MigrationExecutor(connection, self.migration_progress_callback)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/migrations/executor.py", line 18, in __init__
+    self.loader = MigrationLoader(self.connection)
+                  ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/migrations/loader.py", line 58, in __init__
+    self.build_graph()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/migrations/loader.py", line 235, in build_graph
+    self.applied_migrations = recorder.applied_migrations()
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/migrations/recorder.py", line 89, in applied_migrations
+    if self.has_table():
+       ~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/migrations/recorder.py", line 63, in has_table
+    with self.connection.cursor() as cursor:
+         ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 320, in cursor
+    return self._cursor()
+           ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 296, in _cursor
+    self.ensure_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+django.db.utils.OperationalError: connection is bad: no error details available
+
+exit_code=1
+
+$ .venv/bin/python manage.py test --noinput
+Found 83 test(s).
+Creating test database for alias 'default'...
+/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py:512: RuntimeWarning: Normally Django will use a connection to the 'postgres' database to avoid running initialization queries against the production database when it's not needed (for example, when running tests). Django was unable to create a connection to the 'postgres' database and will use the first PostgreSQL database instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.OperationalError: connection is bad: no error details available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 507, in _nodb_cursor
+    with super()._nodb_cursor() as cursor:
+         ~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 712, in _nodb_cursor
+    with conn.cursor() as cursor:
+         ~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 320, in cursor
+    return self._cursor()
+           ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 296, in _cursor
+    self.ensure_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+django.db.utils.OperationalError: connection is bad: no error details available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.OperationalError: connection is bad: no error details available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/manage.py", line 7, in <module>
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/commands/test.py", line 24, in run_from_argv
+    super().run_from_argv(argv)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/base.py", line 420, in run_from_argv
+    self.execute(*args, **cmd_options)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/base.py", line 464, in execute
+    output = self.handle(*args, **options)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/commands/test.py", line 63, in handle
+    failures = test_runner.run_tests(test_labels)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/test/runner.py", line 1080, in run_tests
+    old_config = self.setup_databases(
+        aliases=databases,
+        serialized_aliases=suite.serialized_aliases,
+    )
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/test/runner.py", line 978, in setup_databases
+    return _setup_databases(
+        self.verbosity,
+    ...<5 lines>...
+        **kwargs,
+    )
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/test/utils.py", line 204, in setup_databases
+    connection.creation.create_test_db(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        verbosity=verbosity,
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        serialize=False,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/creation.py", line 62, in create_test_db
+    self._create_test_db(verbosity, autoclobber, keepdb)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/creation.py", line 202, in _create_test_db
+    with self._nodb_cursor() as cursor:
+         ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 533, in _nodb_cursor
+    with conn.cursor() as cursor:
+         ~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 320, in cursor
+    return self._cursor()
+           ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 296, in _cursor
+    self.ensure_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+django.db.utils.OperationalError: connection is bad: no error details available
+
+exit_code=1
+
+$ .venv/bin/python manage.py test clinica.tests.test_unit --noinput
+Found 26 test(s).
+System check identified no issues (0 silenced).
+...........Forbidden: /api/tutores/
+Forbidden: /api/mascotas/
+Forbidden: /api/veterinarios/
+Forbidden: /api/disponibilidades/
+Forbidden: /api/citas/
+Forbidden: /api/fichas/
+Forbidden: /api/vacunas/
+Forbidden: /api/recordatorios/
+Forbidden: /api/usuarios/
+Forbidden: /api/dashboard/
+Forbidden: /api/perfil/
+.Forbidden (CSRF cookie not set.): /login/
+...Method Not Allowed (GET): /logout/
+...........
+----------------------------------------------------------------------
+Ran 26 tests in 0.030s
+
+OK
+
+exit_code=0
+
+$ .venv/bin/python manage.py collectstatic --noinput
+
+3 static files copied to '/home/chororemy/Proyectos/PetCare/staticfiles', 156 unmodified.
+
+exit_code=0
+
+$ node --check static/app.js
+
+exit_code=0
+
+$ node --check static/portal.js
+
+exit_code=0
+
+$ nginx -t -c /tmp/petcare-nginx-verify.conf (solo rutas logs/pid adaptadas a /tmp)
+nginx: the configuration file /tmp/petcare-nginx-verify.conf syntax is ok
+2026/11/05 14:47:05 [emerg] 3#3: open() "/var/log/nginx/access.log" failed (13: Permission denied)
+nginx: configuration file /tmp/petcare-nginx-verify.conf test failed
+exit_code=1
+
+$ nginx -t -c /tmp/petcare-nginx-verify.conf (rutas logs/pid en /tmp y access_log global off)
+nginx: the configuration file /tmp/petcare-nginx-verify.conf syntax is ok
+nginx: [emerg] socket() 0.0.0.0:80 failed (1: Operation not permitted)
+nginx: configuration file /tmp/petcare-nginx-verify.conf test failed
+exit_code=1
+
+=== Verificación tras revisión final ===
+$ .venv/bin/python manage.py check
+System check identified no issues (0 silenced).
+
+exit_code=0
+$ .venv/bin/python manage.py makemigrations --check --dry-run
+No changes detected
+/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/commands/makemigrations.py:161: RuntimeWarning: Got an error checking a consistent migration history performed for database connection 'default': connection is bad: no error details available
+  warnings.warn(
+
+exit_code=0
+$ .venv/bin/python manage.py test --noinput
+Found 86 test(s).
+Creating test database for alias 'default'...
+/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py:512: RuntimeWarning: Normally Django will use a connection to the 'postgres' database to avoid running initialization queries against the production database when it's not needed (for example, when running tests). Django was unable to create a connection to the 'postgres' database and will use the first PostgreSQL database instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.OperationalError: connection is bad: no error details available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 507, in _nodb_cursor
+    with super()._nodb_cursor() as cursor:
+         ~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 712, in _nodb_cursor
+    with conn.cursor() as cursor:
+         ~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 320, in cursor
+    return self._cursor()
+           ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 296, in _cursor
+    self.ensure_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+django.db.utils.OperationalError: connection is bad: no error details available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.OperationalError: connection is bad: no error details available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chororemy/Proyectos/PetCare/manage.py", line 7, in <module>
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/commands/test.py", line 24, in run_from_argv
+    super().run_from_argv(argv)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/base.py", line 420, in run_from_argv
+    self.execute(*args, **cmd_options)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/base.py", line 464, in execute
+    output = self.handle(*args, **options)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/core/management/commands/test.py", line 63, in handle
+    failures = test_runner.run_tests(test_labels)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/test/runner.py", line 1080, in run_tests
+    old_config = self.setup_databases(
+        aliases=databases,
+        serialized_aliases=suite.serialized_aliases,
+    )
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/test/runner.py", line 978, in setup_databases
+    return _setup_databases(
+        self.verbosity,
+    ...<5 lines>...
+        **kwargs,
+    )
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/test/utils.py", line 204, in setup_databases
+    connection.creation.create_test_db(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        verbosity=verbosity,
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        serialize=False,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/creation.py", line 62, in create_test_db
+    self._create_test_db(verbosity, autoclobber, keepdb)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/creation.py", line 202, in _create_test_db
+    with self._nodb_cursor() as cursor:
+         ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 533, in _nodb_cursor
+    with conn.cursor() as cursor:
+         ~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 320, in cursor
+    return self._cursor()
+           ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 296, in _cursor
+    self.ensure_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/chororemy/Proyectos/PetCare/.venv/lib/python3.13/site-packages/psycopg/connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+django.db.utils.OperationalError: connection is bad: no error details available
+
+exit_code=1
+$ .venv/bin/python manage.py test clinica.tests.test_unit --noinput
+Found 26 test(s).
+System check identified no issues (0 silenced).
+...........Forbidden: /api/tutores/
+Forbidden: /api/mascotas/
+Forbidden: /api/veterinarios/
+Forbidden: /api/disponibilidades/
+Forbidden: /api/citas/
+Forbidden: /api/fichas/
+Forbidden: /api/vacunas/
+Forbidden: /api/recordatorios/
+Forbidden: /api/usuarios/
+Forbidden: /api/dashboard/
+Forbidden: /api/perfil/
+.Forbidden (CSRF cookie not set.): /login/
+...Method Not Allowed (GET): /logout/
+...........
+----------------------------------------------------------------------
+Ran 26 tests in 0.033s
+
+OK
+
+exit_code=0
+$ .venv/bin/python manage.py collectstatic --noinput
+
+0 static files copied to '/home/chororemy/Proyectos/PetCare/staticfiles', 159 unmodified.
+
+exit_code=0
+$ node --check static/app.js
+
+exit_code=0
+$ node --check static/portal.js
+
+exit_code=0

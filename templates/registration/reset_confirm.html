@@ -1,0 +1,1 @@
+{% extends 'portal/base.html' %}{% block content %}<section class='card form-card'><h1>Nueva contraseña</h1>{% if validlink %}<form method="post">{% csrf_token %}{{ form.as_p }}<button class="primary">Guardar contraseña</button></form>{% else %}<p>El enlace expiró o ya fue utilizado.</p><a href="/recuperar/">Solicitar otro enlace</a>{% endif %}</section>{% endblock %}

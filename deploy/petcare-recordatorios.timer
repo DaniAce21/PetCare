@@ -1,0 +1,11 @@
+[Unit]
+Description=Revisar recordatorios PetCare cada hora
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+RandomizedDelaySec=60
+Unit=petcare-recordatorios.service
+
+[Install]
+WantedBy=timers.target
